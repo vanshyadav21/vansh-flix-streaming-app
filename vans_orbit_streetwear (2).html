@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VANS-ORBIT // 軌道 | STARK MONOCHROME & CRIMSON ARCHIVE</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Syne, Space Grotesk, JetBrains Mono, Shippori Mincho for Kanji -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700;800&family=Shippori+Mincho:wght@700;900&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Configuration with Stark White, Deep Black, Industrial Steel Grey & Crimson Red Palette -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            void: '#070709',
+            surface: '#111116',
+            surface2: '#181820',
+            steel: '#22222c',
+            'steel-light': '#2f2f3d',
+            'industrial-gray': '#555566',
+            'chalk-gray': '#9d9db3',
+            stark: '#ffffff',
+            crimson: '#ff1744',
+            'crimson-dark': '#b90e2f',
+            'crimson-glow': '#ff2a54',
+            cyberborder: '#2a2a38',
+            'border-stark': '#424254',
+            acid: '#00e676'
+          },
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            grotesk: ['"Space Grotesk"', 'sans-serif'],
+            kanji: ['"Shippori Mincho"', 'serif']
+          },
+          letterSpacing: {
+            tightest: '-0.06em',
+            widest2: '0.22em',
+            extreme: '0.35em'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Dark Brutalist, Steel Plate & Industrial Hazard Styles -->
+  <style>
+    /* Scanlines filter */
+    .scanlines-overlay {
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.45) 50%
+      ), linear-gradient(
+        90deg,
+        rgba(255, 23, 68, 0.03),
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 23, 68, 0.03)
+      );
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Glitch Animation */
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+    }
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .glitch-text::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff1744;
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitch-anim-1 3.5s infinite linear alternate-reverse;
+    }
+    .glitch-text::after {
+      left: -2px;
+      text-shadow: -2px 0 #ffffff;
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+    }
+    @keyframes glitch-anim-1 {
+      0% { clip: rect(10px, 9999px, 44px, 0); transform: skew(0.3deg); }
+      20% { clip: rect(60px, 9999px, 80px, 0); transform: skew(-0.5deg); }
+      40% { clip: rect(20px, 9999px, 65px, 0); transform: skew(0.8deg); }
+      70% { clip: rect(80px, 9999px, 110px, 0); transform: skew(-0.2deg); }
+      100% { clip: rect(15px, 9999px, 35px, 0); transform: skew(0deg); }
+    }
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(120px, 9999px, 150px, 0); transform: skew(-0.4deg); }
+      25% { clip: rect(10px, 9999px, 50px, 0); transform: skew(0.6deg); }
+      50% { clip: rect(70px, 9999px, 100px, 0); transform: skew(-0.8deg); }
+      75% { clip: rect(30px, 9999px, 75px, 0); transform: skew(0.4deg); }
+      100% { clip: rect(90px, 9999px, 130px, 0); transform: skew(0deg); }
+    }
+
+    /* Infinite Marquee */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 24s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Industrial Steel Grid pattern */
+    .bg-grid-cyber {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+
+    /* Crosshairs */
+    .crosshair-corner {
+      position: relative;
+    }
+    .crosshair-corner::before {
+      content: '+';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      color: #ff1744;
+      font-family: monospace;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .crosshair-corner::after {
+      content: '+';
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      color: #ffffff;
+      font-family: monospace;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070709;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff1744;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffffff;
+    }
+
+    /* Industrial Steel Plate Doors (Refined Grey, Black & Stark White Highlights) */
+    .steel-plate {
+      background: 
+        radial-gradient(ellipse at 50% 50%, rgba(35, 35, 46, 0.95) 0%, rgba(10, 10, 14, 0.99) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(255, 255, 255, 0.035) 48px, rgba(255, 255, 255, 0.035) 50px),
+        repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(255, 23, 68, 0.02) 48px, rgba(255, 23, 68, 0.02) 50px);
+      box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.95);
+    }
+
+    /* Monochrome / Crimson Hazard Stripes */
+    .hazard-stripes-mono {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffffff,
+        #ffffff 16px,
+        #111116 16px,
+        #111116 32px
+      );
+    }
+    .hazard-stripes-crimson {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ff1744,
+        #ff1744 16px,
+        #070709 16px,
+        #070709 32px
+      );
+    }
+
+    /* Screen Tremor on Vault Open */
+    @keyframes screen-rumble {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      15% { transform: translate(-3px, 2px) rotate(-0.2deg); }
+      30% { transform: translate(3px, -2px) rotate(0.2deg); }
+      45% { transform: translate(-2px, -3px) rotate(0.1deg); }
+      60% { transform: translate(3px, 1px) rotate(-0.1deg); }
+      75% { transform: translate(-1px, 2px) rotate(0.1deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    .rumble-active {
+      animation: screen-rumble 0.9s ease-in-out infinite;
+    }
+
+    /* Center Wheel Spin Animation */
+    @keyframes rotary-unlock {
+      0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+      30% { transform: translate(-50%, -50%) rotate(-45deg) scale(0.95); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.1); opacity: 0; }
+    }
+    .unlocking-spin {
+      animation: rotary-unlock 1.3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    }
+
+    /* Pneumatic Steam Particle */
+    @keyframes steam-puff {
+      0% { transform: translateY(0) scale(0.6); opacity: 0.95; }
+      100% { transform: translateY(-130px) scale(2.5); opacity: 0; filter: blur(16px); }
+    }
+    .steam-particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(180, 180, 205, 0.3) 60%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: steam-puff 1.6s ease-out forwards;
+    }
+  </style>
+</head>
+
+<body class="bg-void text-gray-200 font-mono antialiased overflow-x-hidden selection:bg-crimson selection:text-white">
+
+  <!-- =========================================================================
+       BUNKER BLAST DOORS / VAULT ENTRY SYSTEM (STARK MONO & CRIMSON THEME)
+       ========================================================================= -->
+  <div id="bunker-vault-overlay" class="fixed inset-0 z-[100] flex overflow-hidden select-none">
+    
+    <!-- Red Alert Strobe Filter -->
+    <div id="bunker-strobe" class="absolute inset-0 bg-crimson/25 z-40 pointer-events-none opacity-0 transition-opacity duration-200"></div>
+
+    <!-- Steam Injection Anchor -->
+    <div id="bunker-steam-container" class="absolute inset-0 z-40 pointer-events-none overflow-hidden"></div>
+
+    <!-- LEFT BUNKER BLAST DOOR WING -->
+    <div id="bunker-left-door" class="w-1/2 h-full steel-plate border-r-4 border-crimson relative z-20 flex flex-col justify-between transition-transform duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)]">
+      
+      <!-- Top Steel Header & Hazard Stripes -->
+      <div>
+        <div class="h-5 hazard-stripes-mono border-b border-black"></div>
+        <div class="p-6 flex items-center justify-between text-[11px] text-chalk-gray border-b border-cyberborder">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 bg-crimson rounded-full animate-ping"></span>
+            <span class="font-bold tracking-widest text-white uppercase">ZONE: SECTOR-09 ARCHIVE</span>
+          </div>
+          <span class="font-mono text-crimson font-bold hidden sm:inline">BULKHEAD MASS: 18,500 KG</span>
+        </div>
+      </div>
+
+      <!-- Left Door Stencil Decal & Branding -->
+      <div class="px-6 sm:px-12 my-auto space-y-4">
+        <div class="inline-block border border-white/40 bg-surface px-3 py-1 text-white text-xs font-bold tracking-widest uppercase">
+          HEAVY INDUSTRIAL SECURITY SPEC
+        </div>
+
+        <div>
+          <h1 class="text-4xl sm:text-6xl md:text-7xl font-black font-syne tracking-tightest leading-none text-white uppercase">
+            VANS-ORBIT
+          </h1>
+          <div class="text-xs sm:text-sm font-bold tracking-widest text-crimson uppercase mt-1">
+            CLOTHING BRAND // 軌道
+          </div>
+        </div>
+
+        <p class="text-[10px] sm:text-xs text-chalk-gray font-mono max-w-sm hidden sm:block leading-relaxed">
+          REINFORCED UNDERGROUND TEXTILE VAULT. 260–520 GSM HIGH-DENSITY APPAREL. DEPRESSURIZE BLAST GATES TO INITIATE SESSION.
+        </p>
+
+        <!-- Mechanical Rivets Decor -->
+        <div class="flex space-x-4 pt-4 text-industrial-gray">
+          <div class="w-4 h-4 rounded-full border-2 border-industrial-gray bg-surface shadow-inner"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-industrial-gray bg-surface shadow-inner"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-industrial-gray bg-surface shadow-inner"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-industrial-gray bg-surface shadow-inner"></div>
+        </div>
+      </div>
+
+      <!-- Bottom Hazard Footer -->
+      <div>
+        <div class="p-6 flex justify-between items-center text-[10px] text-chalk-gray border-t border-cyberborder">
+          <span>SPEC // TOJI PROTOCOL ENGAGED</span>
+          <span class="text-crimson font-bold font-kanji">呪力遮断隔壁</span>
+        </div>
+        <div class="h-5 hazard-stripes-crimson border-t border-black"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT BUNKER BLAST DOOR WING -->
+    <div id="bunker-right-door" class="w-1/2 h-full steel-plate border-l-4 border-crimson relative z-20 flex flex-col justify-between transition-transform duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)]">
+      
+      <!-- Top Steel Header & Hazard Stripes -->
+      <div>
+        <div class="h-5 hazard-stripes-mono border-b border-black"></div>
+        <div class="p-6 flex items-center justify-between text-[11px] text-chalk-gray border-b border-cyberborder">
+          <span class="font-mono text-white font-bold">ATMOSPHERIC PRESSURE: 101.3 kPa</span>
+          <span class="font-bold tracking-widest text-crimson uppercase hidden sm:inline">BULKHEAD TYPE: ARMORED TITANIUM</span>
+        </div>
+      </div>
+
+      <!-- Right Door Stencil Decals & Japanese Kanji -->
+      <div class="px-6 sm:px-12 my-auto space-y-4 text-right">
+        <div class="inline-block border border-crimson/50 bg-crimson/10 px-3 py-1 text-crimson text-xs font-bold tracking-widest uppercase">
+          RESTRICTED ARCHIVE // 200 PIECES GLOBALLY
+        </div>
+
+        <div>
+          <div class="font-kanji text-4xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-l from-crimson via-red-400 to-white">
+            宿命・軌道
+          </div>
+          <div class="text-xs sm:text-sm font-bold tracking-widest text-chalk-gray uppercase mt-1">
+            DROP 004 : ECLIPSE REIGN ARCHIVE
+          </div>
+        </div>
+
+        <p class="text-[10px] sm:text-xs text-chalk-gray font-mono max-w-sm ml-auto hidden sm:block leading-relaxed">
+          CAUTION: UNAUTHORIZED FORCEFUL ENTRY WILL TRIGGER CONTAINMENT LOCKS. PRESS WHEEL CORE TO UNSEAL.
+        </p>
+
+        <!-- Mechanical Rivets Decor Right -->
+        <div class="flex space-x-4 pt-4 justify-end text-industrial-gray">
+          <div class="w-4 h-4 rounded-full border-2 border-industrial-gray bg-surface shadow-inner"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-industrial-gray bg-surface shadow-inner"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-industrial-gray bg-surface shadow-inner"></div>
+          <div class="w-4 h-4 rounded-full border-2 border-industrial-gray bg-surface shadow-inner"></div>
+        </div>
+      </div>
+
+      <!-- Bottom Hazard Footer -->
+      <div>
+        <div class="p-6 flex justify-between items-center text-[10px] text-chalk-gray border-t border-cyberborder">
+          <span class="text-acid font-bold">CORE SEAL: HERMETIC 100%</span>
+          <span class="text-white">DISCHARGE // BRUTALIST STREETWEAR</span>
+        </div>
+        <div class="h-5 hazard-stripes-crimson border-t border-black"></div>
+      </div>
+    </div>
+
+    <!-- CENTER HYDRAULIC WHEEL & ACCESS CONSOLE -->
+    <div id="bunker-center-console" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center pointer-events-auto">
+      
+      <!-- Outer Heavy Steel Ring with Rivets -->
+      <div id="bunker-locking-wheel" class="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-void border-4 border-crimson p-2 shadow-[0_0_60px_rgba(255,23,68,0.45)] flex items-center justify-center transition-all duration-300">
+        
+        <!-- Rotating Industrial Cog Marks -->
+        <div class="absolute inset-1 rounded-full border-2 border-dashed border-chalk-gray/40 animate-[spin_40s_linear_infinite]"></div>
+
+        <!-- Four Crosshair Hydraulic Locking Bars -->
+        <div class="absolute w-full h-1 bg-crimson/60"></div>
+        <div class="absolute h-full w-1 bg-crimson/60"></div>
+
+        <!-- Dial Spokes -->
+        <div class="w-36 h-36 sm:w-48 sm:h-48 rounded-full border border-cyberborder bg-surface2 flex items-center justify-center shadow-inner relative overflow-hidden group">
+          <div class="absolute inset-0 bg-grid-cyber opacity-40"></div>
+
+          <!-- THE INTERACTIVE ENTER / DEPRESSURIZE BUTTON (Stark White & Crimson) -->
+          <button 
+            id="bunker-enter-btn" 
+            onclick="triggerOpenBunker()" 
+            class="relative z-10 w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-gradient-to-b from-white via-gray-200 to-gray-300 hover:from-crimson hover:to-crimson-dark text-black hover:text-white font-syne font-black text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 flex flex-col items-center justify-center p-2 shadow-[0_0_35px_rgba(255,255,255,0.7)] hover:shadow-[0_0_50px_rgba(255,23,68,0.9)] transform active:scale-95 group"
+          >
+            <i data-lucide="shield-alert" class="w-6 h-6 sm:w-7 sm:h-7 mb-1 group-hover:rotate-12 transition-transform text-crimson group-hover:text-white"></i>
+            <span class="leading-none text-center">ENTER</span>
+            <span class="text-[8px] font-mono tracking-tighter opacity-80 mt-0.5">DEPRESSURIZE</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Industrial HUD Status Console Beneath Wheel -->
+      <div id="bunker-status-hud" class="mt-6 bg-surface/90 border border-cyberborder px-5 py-2.5 rounded backdrop-blur-md text-center space-y-1 shadow-2xl">
+        <div class="flex items-center justify-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-crimson animate-ping" id="hud-status-led"></span>
+          <span class="text-xs font-bold text-white tracking-widest uppercase font-mono" id="hud-status-text">
+            STATUS: HEAVY VAULT SEALED
+          </span>
+        </div>
+        <div class="text-[10px] text-chalk-gray tracking-widest font-mono">
+          PRESS [ENTER] BUTTON TO RELEASE HYDRAULIC PRESSURE
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CRT Scanlines Overlay (Toggleable) -->
+  <div id="crt-layer" class="fixed inset-0 scanlines-overlay z-50 pointer-events-none transition-opacity duration-300"></div>
+
+  <!-- Audio Toggle & Scanlines HUD Widget (Floating Bottom-Left) -->
+  <div class="fixed bottom-4 left-4 z-40 flex items-center space-x-2 bg-surface/90 backdrop-blur-md border border-cyberborder p-1.5 px-3 rounded shadow-2xl text-[10px]">
+    <!-- Ambient Drone Audio Button -->
+    <button id="audio-toggle-btn" onclick="toggleAudioDrone()" class="flex items-center gap-1.5 text-gray-300 hover:text-crimson transition group">
+      <span class="w-2 h-2 rounded-full bg-crimson animate-pulse" id="audio-indicator"></span>
+      <span class="font-bold tracking-widest uppercase font-mono" id="audio-status-label">AUDIO // OFF</span>
+    </button>
+    <span class="text-steel-light">|</span>
+    <!-- CRT Filter Toggle -->
+    <button onclick="toggleCRT()" class="text-chalk-gray hover:text-white transition flex items-center gap-1" title="Toggle CRT Scanlines">
+      <i data-lucide="tv" class="w-3.5 h-3.5"></i>
+      <span id="crt-status-label" class="hidden sm:inline">CRT: ON</span>
+    </button>
+    <span class="text-steel-light">|</span>
+    <!-- Currency Toggle -->
+    <button onclick="toggleCurrency()" class="text-crimson font-bold hover:underline" id="currency-toggle-btn">
+      INR [₹]
+    </button>
+  </div>
+
+  <!-- Top Marquee Ticker Tape (Stark White & Black with Crimson Accents) -->
+  <div class="w-full bg-white text-black font-extrabold text-[11px] sm:text-xs py-1.5 tracking-extreme uppercase overflow-hidden border-b border-black select-none z-50 relative">
+    <div class="animate-marquee whitespace-nowrap flex items-center gap-8">
+      <span><strong class="text-crimson">⚡ DROP 004 : ECLIPSE REIGN</strong> // 260–520 GSM HEAVYWEIGHT // 200 PIECES GLOBALLY // DISPATCH WITHIN 24H</span>
+      <span>•</span>
+      <span>⚡ 軌道 // SHADOW WARFARE TEXTILES // STARK MONOCHROME & CRIMSON ARCHIVE // ACID WASH FINISH</span>
+      <span>•</span>
+      <span>⚡ FREE SHIPPING ACROSS INDIA // CRYPTO & UPI ACCEPTED // CODE: <strong class="underline">ORBIT10</strong> FOR 10% OFF</span>
+      <span>•</span>
+      <span><strong class="text-crimson">⚡ DROP 004 : ECLIPSE REIGN</strong> // 260–520 GSM HEAVYWEIGHT // 200 PIECES GLOBALLY // DISPATCH WITHIN 24H</span>
+      <span>•</span>
+      <span>⚡ 軌道 // SHADOW WARFARE TEXTILES // STARK MONOCHROME & CRIMSON ARCHIVE // ACID WASH FINISH</span>
+      <span>•</span>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-void/90 backdrop-blur-md border-b border-cyberborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-2 group">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white bg-black flex items-center justify-center font-syne font-black text-white group-hover:bg-crimson group-hover:border-crimson group-hover:text-black transition duration-300">
+          VO
+        </div>
+        <div>
+          <div class="flex items-baseline space-x-1">
+            <span class="font-syne font-black text-xl sm:text-2xl tracking-tighter text-white group-hover:text-crimson transition">VANS-ORBIT</span>
+            <span class="font-kanji text-xs sm:text-sm text-crimson font-black tracking-widest">// 軌道</span>
+          </div>
+          <p class="text-[9px] text-chalk-gray tracking-widest uppercase hidden sm:block">BRUTALIST ARCHIVE CLAN</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-6 text-xs tracking-widest uppercase font-mono">
+        <a href="#drops" class="text-gray-300 hover:text-white transition flex items-center gap-1 group">
+          <span class="text-crimson opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span> ARCHIVE
+        </a>
+        <a href="#drops" class="text-gray-300 hover:text-white transition flex items-center gap-1 group">
+          <span class="text-crimson opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span> DROPS
+        </a>
+        <a href="#fit-builder" class="text-gray-300 hover:text-white transition flex items-center gap-1 group">
+          <span class="text-crimson opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span> FIT BUILDER
+        </a>
+        <a href="#specifications" class="text-gray-300 hover:text-white transition flex items-center gap-1 group">
+          <span class="text-crimson opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span> TECH-SPEC
+        </a>
+        <a href="#manifesto" class="text-gray-300 hover:text-white transition flex items-center gap-1 group">
+          <span class="text-crimson opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span> COLLECTIVE
+        </a>
+      </nav>
+
+      <!-- Utility Actions (Search, Cart & Bunker Trigger) -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <!-- Bunker Seal Re-trigger button -->
+        <button onclick="resealBunker()" class="p-2 border border-cyberborder hover:border-white text-gray-300 hover:text-white transition flex items-center gap-1.5 text-xs font-mono" title="Re-seal Bunker Blast Doors">
+          <i data-lucide="lock" class="w-3.5 h-3.5 text-crimson"></i>
+          <span class="hidden lg:inline text-[10px] tracking-wider font-bold">SEAL BUNKER</span>
+        </button>
+
+        <!-- Quick Search Trigger -->
+        <button onclick="triggerSearchFocus()" class="p-2 border border-cyberborder hover:border-white text-gray-300 hover:text-white transition">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Cart Drawer Toggle -->
+        <button onclick="toggleCartDrawer(true)" class="relative p-2 border border-white bg-white/10 hover:bg-white text-white hover:text-black font-bold transition flex items-center space-x-2">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span class="text-xs tracking-widest hidden sm:inline">DROP CART</span>
+          <span id="cart-counter-badge" class="bg-crimson text-white font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <!-- Mobile Menu Hamburger -->
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 border border-cyberborder text-gray-300 hover:text-white">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-cyberborder bg-surface px-6 py-4 space-y-3 font-mono text-xs uppercase tracking-widest">
+      <a href="#drops" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-white">ARCHIVE DROPS</a>
+      <a href="#fit-builder" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-white">INTERACTIVE FIT BUILDER</a>
+      <a href="#specifications" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-white">CLAN TECH SPECIFICATIONS</a>
+      <a href="#manifesto" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-white">COLLECTIVE MANIFESTO</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex items-center justify-center bg-grid-cyber border-b border-cyberborder overflow-hidden px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Ambient Distressed Cyber Radial Glow -->
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[550px] bg-crimson/15 blur-[140px] pointer-events-none rounded-full"></div>
+    <div class="absolute bottom-0 right-10 w-96 h-96 bg-white/5 blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+      
+      <!-- Left Column: Heavy Glitch Copy & Directives -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Drop Indicator Tag -->
+        <div class="inline-flex items-center space-x-2 border border-border-stark bg-surface px-3 py-1">
+          <span class="w-2 h-2 bg-crimson rounded-full animate-ping"></span>
+          <span class="text-xs text-white font-mono font-bold tracking-widest uppercase">OPERATIONAL // DROP 004 : ECLIPSE REIGN</span>
+        </div>
+
+        <!-- Huge Brutalist Heading with Glitch Text -->
+        <div class="space-y-1">
+          <h1 class="text-4xl sm:text-6xl xl:text-7xl font-black font-syne tracking-tightest leading-[0.9] uppercase text-white">
+            <span class="glitch-text block" data-text="CYBER-ORGANIC">CYBER-ORGANIC</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-crimson">DRAPING &</span>
+            <span class="block">BRUTALISM.</span>
+          </h1>
+          <p class="font-kanji text-crimson text-sm sm:text-base font-black tracking-widest pt-2">
+            呪力制限 // 宿命と重厚なる白黒鎧 // 450GSM FRENCH TERRY
+          </p>
+        </div>
+
+        <!-- Subtitle & Technical Philosophy -->
+        <p class="text-xs sm:text-sm text-chalk-gray font-mono max-w-xl leading-relaxed">
+          Inspired by the raw lethality of Zenin martial restriction and underground GangRage aesthetics. Forged from custom 260–520 GSM combed cotton, drop-shoulder silhouettes, and indelible discharge silk printing.
+        </p>
+
+        <!-- CTAs with Audio Click triggers -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="#drops" onclick="playBeepSound()" class="relative group px-8 py-3.5 bg-white hover:bg-crimson text-black hover:text-white font-syne font-black tracking-widest text-xs uppercase transition duration-200 flex items-center space-x-2 shadow-lg shadow-white/10">
+            <span>EXPLORE DROP 004</span>
+            <i data-lucide="arrow-down-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+          </a>
+          <a href="#fit-builder" onclick="playBeepSound()" class="px-6 py-3.5 border border-border-stark hover:border-white bg-surface2/80 text-white font-mono text-xs uppercase tracking-widest hover:text-white transition flex items-center space-x-2">
+            <i data-lucide="crosshair" class="w-3.5 h-3.5 text-crimson"></i>
+            <span>3D FIT BUILDER</span>
+          </a>
+        </div>
+
+        <!-- Status Metrics Widget -->
+        <div class="grid grid-cols-3 gap-3 pt-6 border-t border-cyberborder max-w-lg font-mono">
+          <div class="bg-surface border border-cyberborder p-3">
+            <div class="text-[10px] text-chalk-gray tracking-widest">STOCK REMAINING</div>
+            <div class="text-lg font-black text-white font-syne" id="stock-gauge-count">38 / 200</div>
+            <div class="w-full bg-void h-1 mt-1.5 overflow-hidden">
+              <div class="bg-crimson h-full w-[19%]"></div>
+            </div>
+          </div>
+          <div class="bg-surface border border-cyberborder p-3">
+            <div class="text-[10px] text-chalk-gray tracking-widest">DROP TIMER</div>
+            <div class="text-sm font-bold text-white font-mono" id="drop-countdown">04:18:22:09</div>
+            <div class="text-[9px] text-acid">LIMITED RUN STATUS</div>
+          </div>
+          <div class="bg-surface border border-cyberborder p-3">
+            <div class="text-[10px] text-chalk-gray tracking-widest">AVG DENSITY</div>
+            <div class="text-lg font-black text-white font-syne">450 <span class="text-xs text-chalk-gray">GSM</span></div>
+            <div class="text-[9px] text-chalk-gray">HEAVY FRENCH TERRY</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Hero Visual Asset (Model / Cyber Hood Mockup) -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative border-2 border-border-stark bg-surface p-2 crosshair-corner group">
+          <!-- Top Cyber Metabar -->
+          <div class="flex items-center justify-between border-b border-cyberborder pb-2 mb-2 px-1 text-[10px] text-chalk-gray font-mono">
+            <span>SPEC: HEAVENLY-RESTRICTION-01</span>
+            <span class="text-crimson font-bold">LIVE INSPECT</span>
+          </div>
+          
+          <!-- Image with glitch overlays and tags -->
+          <div class="relative aspect-[4/5] overflow-hidden bg-black">
+            <img 
+              id="hero-img-preview"
+              src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1000&q=85" 
+              alt="Cyber Streetwear Hero" 
+              class="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition duration-700 scale-100 group-hover:scale-105"
+            />
+            
+            <!-- Floating Cyber Callouts -->
+            <div class="absolute top-4 left-4 bg-black/90 border border-white px-2.5 py-1 text-[10px] font-mono text-white backdrop-blur flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 bg-crimson rounded-full animate-ping"></span>
+              <span>HEAVYWEIGHT ACID WASH</span>
+            </div>
+            
+            <div class="absolute bottom-4 right-4 bg-black/95 border border-border-stark p-2 text-[10px] font-mono text-right max-w-[190px] backdrop-blur">
+              <span class="text-white font-bold block">TOJI-SPEC BOMBER // 01</span>
+              <span class="text-chalk-gray text-[9px] leading-tight block">Kevlar-blend shoulder inserts, thermal storm collar, double-zipper.</span>
+            </div>
+
+            <!-- Japanese Vertical Stamp -->
+            <div class="absolute top-6 right-4 font-kanji text-crimson/80 text-2xl font-black writing-vertical select-none pointer-events-none" style="writing-mode: vertical-rl;">
+              呪術特装型
+            </div>
+          </div>
+
+          <!-- Bottom Footer Bar -->
+          <div class="pt-2 px-1 flex items-center justify-between text-[10px] text-chalk-gray font-mono">
+            <span>LATITUDE 35.6762° N // TOKYO</span>
+            <span class="text-white font-bold">100% COMBED COTTON</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Archive Drops & Catalog Section -->
+  <section id="drops" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-cyberborder pb-6 mb-8 gap-4">
+      <div>
+        <div class="flex items-center space-x-2 text-crimson text-xs font-mono tracking-widest uppercase">
+          <span>// CAPSULE COLLECTION</span>
+          <span>•</span>
+          <span class="font-kanji">完全限定品</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black font-syne tracking-tight text-white uppercase mt-1">
+          THE SHADOW ARCHIVE
+        </h2>
+      </div>
+
+      <!-- Live Search & Filter Bar -->
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <input 
+            type="text" 
+            id="product-search-input"
+            placeholder="FILTER BY SPEC / CODE..." 
+            oninput="handleSearchFilter(event)"
+            class="bg-surface border border-border-stark focus:border-white text-xs px-3 py-2 text-white placeholder-chalk-gray focus:outline-none w-48 sm:w-64 font-mono"
+          />
+          <i data-lucide="filter" class="w-3.5 h-3.5 text-chalk-gray absolute right-3 top-2.5"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Pill Filter Tabs (Monochrome & Crimson Styling) -->
+    <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar pb-4 mb-8 text-xs font-mono">
+      <button onclick="setFilterCategory('all')" class="cat-pill active px-4 py-2 bg-white text-black font-bold uppercase transition" data-category="all">
+        [ ALL ARCHIVES (06) ]
+      </button>
+      <button onclick="setFilterCategory('tees')" class="cat-pill px-4 py-2 border border-cyberborder bg-surface text-gray-300 hover:border-white hover:text-white uppercase transition" data-category="tees">
+        OVERSIZED TEES (260 GSM)
+      </button>
+      <button onclick="setFilterCategory('hoodies')" class="cat-pill px-4 py-2 border border-cyberborder bg-surface text-gray-300 hover:border-white hover:text-white uppercase transition" data-category="hoodies">
+        ARMORED HOODIES (450 GSM)
+      </button>
+      <button onclick="setFilterCategory('bottoms')" class="cat-pill px-4 py-2 border border-cyberborder bg-surface text-gray-300 hover:border-white hover:text-white uppercase transition" data-category="bottoms">
+        TACTICAL CARGOS
+      </button>
+      <button onclick="setFilterCategory('accessories')" class="cat-pill px-4 py-2 border border-cyberborder bg-surface text-gray-300 hover:border-white hover:text-white uppercase transition" data-category="accessories">
+        ORBIT ACCESSORIES
+      </button>
+    </div>
+
+    <!-- Products Grid -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Injected via JavaScript -->
+    </div>
+  </section>
+
+  <!-- Interactive Fit Builder Section -->
+  <section id="fit-builder" class="border-y border-cyberborder bg-surface py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs text-crimson font-mono tracking-widest uppercase">// AESTHETIC SIMULATION LAB</span>
+        <h2 class="text-3xl sm:text-5xl font-black font-syne text-white uppercase tracking-tight mt-1">
+          CUSTOM ORBIT FIT BUILDER
+        </h2>
+        <p class="text-xs sm:text-sm text-chalk-gray font-mono mt-2">
+          Harmonize layered heavyweight armor pieces. Mix drop-shoulder cuts with tactical cargos and ballistic accessories in real-time.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-void border border-border-stark p-6 sm:p-10 crosshair-corner">
+        
+        <!-- Controls Column: Tops Selection -->
+        <div class="lg:col-span-4 space-y-6">
+          <div class="border-b border-cyberborder pb-3">
+            <span class="text-xs font-mono text-white font-bold uppercase">01 // SELECT UPPER TORSO</span>
+            <div class="grid grid-cols-2 gap-2 mt-3" id="builder-tops-selector">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div class="border-b border-cyberborder pb-3">
+            <span class="text-xs font-mono text-white font-bold uppercase">02 // SELECT LOWER STRATA</span>
+            <div class="grid grid-cols-2 gap-2 mt-3" id="builder-bottoms-selector">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div>
+            <span class="text-xs font-mono text-white font-bold uppercase">03 // TACTICAL ACCENT</span>
+            <div class="grid grid-cols-2 gap-2 mt-3" id="builder-acc-selector">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Column: Cyber Silhouette Preview -->
+        <div class="lg:col-span-4 flex flex-col items-center justify-center relative bg-surface border border-cyberborder p-6 min-h-[440px]">
+          
+          <!-- Silhouette Canvas / Visualizer Representation -->
+          <div class="relative w-64 h-96 flex flex-col items-center justify-center">
+            <!-- Background Glow -->
+            <div class="absolute inset-0 bg-white/5 blur-xl rounded-full"></div>
+
+            <!-- Top Layer Preview Image -->
+            <div class="relative w-44 h-44 z-20 transition-all duration-300 transform" id="fit-top-preview">
+              <img src="" alt="Top" class="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(255,23,68,0.3)]" id="fit-top-img">
+            </div>
+
+            <!-- Bottom Layer Preview Image -->
+            <div class="relative w-40 h-44 -mt-8 z-10 transition-all duration-300" id="fit-bottom-preview">
+              <img src="" alt="Bottom" class="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]" id="fit-bottom-img">
+            </div>
+
+            <!-- Accessory Floating Badge -->
+            <div class="absolute top-2 right-2 bg-white/10 border border-white px-2 py-1 text-[9px] font-mono text-white backdrop-blur" id="fit-acc-badge">
+              ACCESSORY EQUIPPED
+            </div>
+          </div>
+
+          <div class="mt-4 text-center">
+            <div class="text-[10px] text-chalk-gray font-mono">ESTIMATED COMBINED MASS</div>
+            <div class="text-sm font-bold text-white font-mono" id="fit-builder-mass">710 GSM TOTAL ARMORED COMBAT SPEC</div>
+          </div>
+        </div>
+
+        <!-- Right Column: Ensemble Summary & Bundle Add -->
+        <div class="lg:col-span-4 bg-surface2 border border-cyberborder p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-cyberborder pb-3">
+            <h4 class="font-syne font-black text-sm text-white uppercase">SYNCHRONIZED BUNDLE</h4>
+            <span class="text-xs text-acid font-mono font-bold">10% BUNDLE DISCOUNT</span>
+          </div>
+
+          <div class="space-y-3 text-xs font-mono" id="fit-bundle-items">
+            <!-- Dynamic bundle details -->
+          </div>
+
+          <div class="border-t border-cyberborder pt-4">
+            <div class="flex justify-between items-baseline mb-4">
+              <span class="text-xs text-chalk-gray font-mono uppercase">COMPOSITE BUNDLE TOTAL:</span>
+              <span class="text-xl font-syne font-black text-white" id="fit-bundle-price">₹7,899</span>
+            </div>
+
+            <button onclick="addBundleToCart()" class="w-full py-3.5 bg-white hover:bg-crimson text-black hover:text-white font-syne font-black tracking-widest text-xs uppercase transition duration-200 flex items-center justify-center space-x-2">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+              <span>ACQUIRE ENTIRE ENSEMBLE</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specifications Matrix -->
+  <section id="specifications" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="border-b border-cyberborder pb-4 mb-10 flex flex-col sm:flex-row justify-between sm:items-end gap-2">
+      <div>
+        <span class="text-xs text-crimson font-mono tracking-widest uppercase">// TEXTILE BALLISTICS</span>
+        <h2 class="text-3xl sm:text-5xl font-black font-syne text-white uppercase tracking-tight">
+          VANS-ORBIT ANATOMY
+        </h2>
+      </div>
+      <span class="text-xs font-mono text-chalk-gray">MIL-SPEC // RESTRICTION GRADE 04</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 font-mono">
+      <div class="border border-cyberborder bg-surface p-5 space-y-2 hover:border-white transition">
+        <div class="text-white font-black text-2xl font-syne">260–520</div>
+        <div class="text-xs font-bold text-crimson uppercase">GRAMS PER SQ. METER</div>
+        <p class="text-[11px] text-gray-400">Zero lightweight flimsy threads. Ultra-dense French Terry loopback ensures structured silhouette that never sags.</p>
+      </div>
+
+      <div class="border border-cyberborder bg-surface p-5 space-y-2 hover:border-white transition">
+        <div class="text-white font-black text-2xl font-syne">ACID-WASH</div>
+        <div class="text-xs font-bold text-crimson uppercase">INDIVIDUAL VINTAGE PATINA</div>
+        <p class="text-[11px] text-gray-400">Every individual piece is artisan-submerged in charcoal pumice dye baths. No two garments share the same distressing pattern.</p>
+      </div>
+
+      <div class="border border-cyberborder bg-surface p-5 space-y-2 hover:border-white transition">
+        <div class="text-white font-black text-2xl font-syne">DISCHARGE</div>
+        <div class="text-xs font-bold text-crimson uppercase">BREATHABLE SILKSCREEN</div>
+        <p class="text-[11px] text-gray-400">Discharge ink lifts fabric dye instead of plastering thick plastic on the garment, granting permanent cracked durability.</p>
+      </div>
+
+      <div class="border border-cyberborder bg-surface p-5 space-y-2 hover:border-white transition">
+        <div class="text-white font-black text-2xl font-syne">REINFORCED</div>
+        <div class="text-xs font-bold text-crimson uppercase">TACTICAL HARDWARE</div>
+        <p class="text-[11px] text-gray-400">Matte zinc zippers, heavy paracord toggles, double-stitched bar-tack stress points engineered for lifetime wear.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collective Manifesto & Newsletter -->
+  <section id="manifesto" class="border-t border-cyberborder bg-void py-20 px-4 sm:px-6 lg:px-8 relative">
+    <div class="max-w-4xl mx-auto text-center space-y-6">
+      <span class="font-kanji text-crimson text-2xl font-black">禅院派生 // 限界突破</span>
+      <h3 class="text-3xl sm:text-5xl font-black font-syne tracking-tightest text-white uppercase">
+        WE REJECT FAST FASHION.<br>WE FORGE HEAVY ARMOR.
+      </h3>
+      <p class="text-xs sm:text-sm text-chalk-gray font-mono leading-relaxed max-w-2xl mx-auto">
+        VANS-Orbit exists in the crossroads between dark anime folklore and uncompromising brutalist urbanism. No restocks once the 200 units expire. Enter your frequency below for encrypted drop alerts.
+      </p>
+
+      <form onsubmit="handleNewsletterSubmit(event)" class="flex flex-col sm:flex-row justify-center max-w-md mx-auto gap-2 pt-4">
+        <input 
+          type="email" 
+          required 
+          placeholder="ENTER CIPHER / EMAIL..." 
+          class="bg-surface border border-border-stark focus:border-white text-xs px-4 py-3 text-white placeholder-chalk-gray focus:outline-none font-mono flex-1"
+        />
+        <button type="submit" class="px-6 py-3 bg-white hover:bg-crimson text-black hover:text-white font-syne font-black text-xs uppercase tracking-widest transition">
+          INITIATE
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Brutalist Master Footer -->
+  <footer class="border-t border-cyberborder bg-surface py-12 px-4 sm:px-6 lg:px-8 text-xs font-mono text-chalk-gray">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+      <div class="col-span-2 space-y-3">
+        <div class="flex items-center space-x-2">
+          <span class="font-syne font-black text-white text-lg tracking-wider">VANS-ORBIT</span>
+          <span class="text-crimson font-kanji font-bold">// 軌道</span>
+        </div>
+        <p class="text-[11px] text-gray-400 max-w-xs">
+          High-density brutalist streetwear, cyberpunk garments, and martial clan textiles designed for the vanguard.
+        </p>
+      </div>
+
+      <div>
+        <h5 class="text-white font-bold uppercase tracking-widest text-[11px] mb-3">ARCHIVES</h5>
+        <ul class="space-y-1.5 text-[11px]">
+          <li><a href="#drops" class="hover:text-white transition">DROP 004 : ECLIPSE</a></li>
+          <li><a href="#drops" class="hover:text-white transition">DROP 003 : TOJI PROTOCOL</a></li>
+          <li><a href="#drops" class="hover:text-white transition">VAULT ARCHIVE</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-bold uppercase tracking-widest text-[11px] mb-3">SUPPORT</h5>
+        <ul class="space-y-1.5 text-[11px]">
+          <li><a href="#" onclick="openSizeGuideModal()" class="hover:text-white transition">SIZE MATRIX (CM)</a></li>
+          <li><a href="#" onclick="showToast('TRACKING PORTAL: ORDER ID REQUIRED')" class="hover:text-white transition">TRACK DISPATCH</a></li>
+          <li><a href="#" onclick="showToast('DISPATCH: AIR CARGO VIA BLUEDART / DHL')" class="hover:text-white transition">SHIPPING PROTOCOLS</a></li>
+          <li><a href="#" onclick="resealBunker()" class="text-crimson hover:underline transition font-bold">TEST BUNKER BLAST GATE</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-bold uppercase tracking-widest text-[11px] mb-3">LEGAL & CODE</h5>
+        <ul class="space-y-1.5 text-[11px]">
+          <li><a href="#" class="hover:text-white transition">PRIVACY CIPHER</a></li>
+          <li><a href="#" class="hover:text-white transition">TERMS OF RESTRICTION</a></li>
+          <li><span class="text-acid">STATUS: SYSTEM OPTIMAL</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto border-t border-cyberborder/60 pt-6 flex flex-col sm:flex-row justify-between items-center text-[10px] gap-2">
+      <div>© 2026 VANS-ORBIT // 軌道 CORP. ALL CURSED RIGHTS RESERVED.</div>
+      <div class="text-gray-400">ENGINEERED FOR SUPREME HEAVYWEIGHT WEAR</div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer Overlay -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden transition-opacity duration-300 opacity-0" onclick="toggleCartDrawer(false)"></div>
+  
+  <!-- Cart Drawer Content -->
+  <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full sm:w-[460px] bg-void border-l border-cyberborder z-50 transform translate-x-full transition-transform duration-300 ease-out flex flex-col font-mono">
+    
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-cyberborder flex items-center justify-between bg-surface">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="shopping-bag" class="w-4 h-4 text-white"></i>
+        <h3 class="font-syne font-black text-sm text-white tracking-widest uppercase">DROP CART // 軌道</h3>
+        <span class="text-xs text-chalk-gray" id="cart-drawer-count">(0)</span>
+      </div>
+      <button onclick="toggleCartDrawer(false)" class="p-1.5 border border-cyberborder hover:border-white text-gray-300 hover:text-white transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Free Worldwide Shipping Gauge -->
+    <div class="px-5 py-2.5 bg-surface2 border-b border-cyberborder text-[10px]">
+      <div class="flex justify-between text-gray-300 mb-1">
+        <span>FREE EXPRESS SHIPPING THRESHOLD</span>
+        <span id="shipping-threshold-text" class="text-white font-bold">₹1,500 AWAY</span>
+      </div>
+      <div class="w-full bg-void h-1 overflow-hidden">
+        <div id="shipping-progress-bar" class="bg-crimson h-full w-[40%] transition-all duration-300"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items Scroll Area -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-5 space-y-4">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Drawer Footer / Summary -->
+    <div class="p-5 border-t border-cyberborder bg-surface space-y-3">
+      <!-- Promo Code Section -->
+      <div class="flex gap-2">
+        <input 
+          type="text" 
+          id="promo-input" 
+          placeholder="DISCOUNT CODE (TRY: ORBIT10)" 
+          class="bg-surface2 border border-border-stark text-xs px-3 py-2 text-white placeholder-chalk-gray focus:border-white focus:outline-none flex-1 uppercase"
+        />
+        <button onclick="applyPromoCode()" class="px-4 py-2 border border-white bg-black hover:bg-white text-white hover:text-black text-xs uppercase font-bold transition">
+          APPLY
+        </button>
+      </div>
+      <div id="promo-status-msg" class="text-[10px] hidden font-mono"></div>
+
+      <!-- Financial Totals -->
+      <div class="space-y-1.5 text-xs text-chalk-gray pt-2">
+        <div class="flex justify-between">
+          <span>SUBTOTAL:</span>
+          <span class="text-white font-bold" id="cart-subtotal-val">₹0</span>
+        </div>
+        <div class="flex justify-between text-acid" id="cart-discount-row">
+          <span>ORBIT CODE DISCOUNT:</span>
+          <span id="cart-discount-val">-₹0</span>
+        </div>
+        <div class="flex justify-between">
+          <span>ESTIMATED TAX / DUTIES:</span>
+          <span class="text-white">INCLUDED</span>
+        </div>
+        <div class="border-t border-cyberborder pt-2 flex justify-between text-sm text-white font-bold">
+          <span>FINAL TOTAL:</span>
+          <span class="text-white font-syne text-lg font-black" id="cart-grandtotal-val">₹0</span>
+        </div>
+      </div>
+
+      <!-- Checkout CTA -->
+      <button onclick="proceedToCheckout()" class="w-full py-4 bg-white hover:bg-crimson text-black hover:text-white font-syne font-black tracking-widest text-xs uppercase transition duration-200 flex items-center justify-center space-x-2">
+        <i data-lucide="shield-check" class="w-4 h-4"></i>
+        <span>DISPATCH & CHECKOUT</span>
+      </button>
+
+      <p class="text-[9px] text-center text-chalk-gray">256-BIT ENCRYPTED RAZORPAY / STRIPE / UPI TRANSACTION</p>
+    </div>
+  </div>
+
+  <!-- Quick View / Product Detail Modal -->
+  <div id="quick-view-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md items-center justify-center p-4 overflow-y-auto">
+    <div class="relative bg-surface border border-border-stark max-w-4xl w-full p-6 sm:p-8 crosshair-corner font-mono text-xs my-auto" onclick="event.stopPropagation()">
+      
+      <!-- Close Button -->
+      <button onclick="closeQuickViewModal()" class="absolute top-4 right-4 p-2 border border-cyberborder text-gray-300 hover:text-white hover:border-white">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <!-- Mockup Display Image -->
+        <div class="relative aspect-square border border-cyberborder bg-black overflow-hidden group">
+          <img id="modal-product-img" src="" alt="Product Detail" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+          <div class="absolute top-3 left-3 bg-black/90 border border-white px-2 py-0.5 text-[9px] text-white font-bold" id="modal-product-gsm">
+            450 GSM FRENCH TERRY
+          </div>
+        </div>
+
+        <!-- Product Details Column -->
+        <div class="space-y-4">
+          <div>
+            <div class="text-crimson text-[10px] tracking-widest uppercase font-bold" id="modal-product-code">CODE // VO-001</div>
+            <h3 class="text-2xl font-black font-syne text-white uppercase mt-0.5" id="modal-product-title">PRODUCT NAME</h3>
+            <div class="text-xl font-syne font-black text-white mt-1" id="modal-product-price">₹3,499</div>
+          </div>
+
+          <p class="text-gray-300 leading-relaxed text-xs" id="modal-product-desc">
+            Product narrative description...
+          </p>
+
+          <!-- Tech Specs Pill List -->
+          <div class="border-y border-cyberborder py-3 space-y-1.5 text-[11px]">
+            <div class="flex justify-between"><span class="text-chalk-gray">FABRIC SPECIFICATION:</span> <span class="text-white font-bold" id="modal-spec-fabric">100% Cotton</span></div>
+            <div class="flex justify-between"><span class="text-chalk-gray">FIT ARCHITECTURE:</span> <span class="text-white font-bold" id="modal-spec-fit">Boxy Oversized</span></div>
+            <div class="flex justify-between"><span class="text-chalk-gray">DURABILITY RATING:</span> <span class="text-acid font-bold">Grade-V Indelible</span></div>
+          </div>
+
+          <!-- Size Selector -->
+          <div>
+            <div class="flex justify-between text-[11px] mb-2">
+              <span class="text-chalk-gray">SELECT CADENCE / SIZE:</span>
+              <button onclick="openSizeGuideModal()" class="text-white underline hover:text-crimson">SIZE GUIDE MATRIX</button>
+            </div>
+            <div class="grid grid-cols-5 gap-2" id="modal-size-container">
+              <!-- S, M, L, XL, XXL buttons -->
+            </div>
+          </div>
+
+          <!-- Add to Drop Cart Button -->
+          <div class="pt-2">
+            <button id="modal-add-btn" class="w-full py-4 bg-white hover:bg-crimson text-black hover:text-white font-syne font-black text-xs uppercase tracking-widest transition flex items-center justify-center space-x-2">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>ACQUIRE TO DROP CART</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Size Guide Matrix Modal -->
+  <div id="size-guide-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md items-center justify-center p-4">
+    <div class="bg-surface border border-border-stark max-w-xl w-full p-6 font-mono text-xs text-gray-300 relative">
+      <button onclick="closeSizeGuideModal()" class="absolute top-4 right-4 text-gray-300 hover:text-white">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <span class="text-crimson text-[10px] tracking-widest uppercase">// GEOMETRIC DIMENSIONS</span>
+      <h3 class="font-syne font-black text-lg text-white uppercase mb-4">VANS-ORBIT SIZE MATRIX (CM)</h3>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse border border-cyberborder">
+          <thead>
+            <tr class="bg-surface2 text-white border-b border-cyberborder text-[11px]">
+              <th class="p-2.5">SIZE</th>
+              <th class="p-2.5">CHEST WIDTH</th>
+              <th class="p-2.5">LENGTH</th>
+              <th class="p-2.5">SHOULDER DROP</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-cyberborder text-[11px]">
+            <tr><td class="p-2 text-white font-bold">S</td><td class="p-2">116 cm</td><td class="p-2">72 cm</td><td class="p-2">56 cm</td></tr>
+            <tr><td class="p-2 text-white font-bold">M</td><td class="p-2">122 cm</td><td class="p-2">74 cm</td><td class="p-2">58 cm</td></tr>
+            <tr><td class="p-2 text-white font-bold">L</td><td class="p-2">128 cm</td><td class="p-2">76 cm</td><td class="p-2">60 cm</td></tr>
+            <tr><td class="p-2 text-white font-bold">XL</td><td class="p-2">134 cm</td><td class="p-2">78 cm</td><td class="p-2">62 cm</td></tr>
+            <tr><td class="p-2 text-white font-bold">XXL</td><td class="p-2">140 cm</td><td class="p-2">80 cm</td><td class="p-2">64 cm</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-[10px] text-chalk-gray mt-4">
+        * All measurements reflect tailored drop-shoulder cuts. For true boxy drape, select your standard sizing. For hyper-opium aesthetic, size up once.
+      </p>
+    </div>
+  </div>
+
+  <!-- Order Complete Modal -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md items-center justify-center p-4">
+    <div class="bg-surface border border-white max-w-md w-full p-8 font-mono text-center space-y-4">
+      <div class="w-12 h-12 bg-white/10 border-2 border-white rounded-full flex items-center justify-center mx-auto text-white">
+        <i data-lucide="check" class="w-6 h-6"></i>
+      </div>
+
+      <span class="text-crimson text-xs tracking-widest font-bold block uppercase">// DISPATCH ORDER INITIALIZED</span>
+      <h3 class="font-syne font-black text-2xl text-white uppercase">MISSION CONFIRMED</h3>
+      <p class="text-xs text-gray-300">
+        Cipher assigned to order: <span class="text-white font-bold" id="checkout-cipher-id">#VO-9921-X</span>. Confirmation dispatch email has been transmitted.
+      </p>
+
+      <button onclick="closeCheckoutModal()" class="w-full py-3 bg-white text-black font-syne font-black text-xs uppercase tracking-widest hover:bg-crimson hover:text-white transition">
+        RETURN TO ARCHIVE
+      </button>
+    </div>
+  </div>
+
+  <!-- Generic Cyber Toast -->
+  <div id="toast" class="fixed bottom-16 right-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-surface border-l-4 border-crimson text-white px-4 py-3 shadow-2xl font-mono text-xs flex items-center space-x-2">
+    <span class="w-1.5 h-1.5 bg-crimson rounded-full animate-ping"></span>
+    <span id="toast-message">STATUS UPDATE</span>
+  </div>
+
+  <script>
+    /* =========================================================================
+       DATABASE: PRODUCTS (Zenin Clan & GangRage Inspired Aesthetics)
+       ========================================================================= */
+    const PRODUCTS = [
+      {
+        id: "VO-001",
+        title: "TOJI-SPEC REVERSIBLE BOMBER JACKET",
+        category: "hoodies",
+        priceINR: 5999,
+        priceUSD: 72,
+        gsm: 520,
+        limitedQty: 35,
+        fabric: "Heavyweight Nylon & French Terry",
+        fit: "Drop-Shoulder Tactical Crop",
+        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80",
+        description: "Engineered with martial restriction aesthetics. Reversible military slate inner with concealed tactical harness pockets and industrial zinc double-sliders."
+      },
+      {
+        id: "VO-002",
+        title: "HEAVENLY RESTRICTION ACID-WASH TEE",
+        category: "tees",
+        priceINR: 2499,
+        priceUSD: 30,
+        gsm: 280,
+        limitedQty: 50,
+        fabric: "100% Pumice-Washed Combed Cotton",
+        fit: "Extreme Boxy Oversize",
+        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
+        description: "Submerged in stone acid wash for a unique volcanic grayscale texture. Features high-density discharge screenprint that withstands industrial friction."
+      },
+      {
+        id: "VO-003",
+        title: "ORBIT PROTOCOL HEAVY HOODIE 450 GSM",
+        category: "hoodies",
+        priceINR: 4299,
+        priceUSD: 52,
+        gsm: 450,
+        limitedQty: 40,
+        fabric: "Pure 450 GSM Loopback French Terry",
+        fit: "Double-Layered Structured Hood",
+        image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80",
+        description: "The crown jewel of winter warfare. Zero drawstrings for a clean architectural brutalist neckline, heavy ribbed cuffs, and distressed kanji embroidery."
+      },
+      {
+        id: "VO-004",
+        title: "SHADOW CLAN BERSERK CARGO PANTS",
+        category: "bottoms",
+        priceINR: 3799,
+        priceUSD: 46,
+        gsm: 340,
+        limitedQty: 25,
+        fabric: "Water-Repellent Ripstop Canvas",
+        fit: "Wide-Leg Stacked Hem",
+        image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80",
+        description: "Multi-pocket configuration featuring 8 tactical compartmental pouches, MOLLE webbing, and ankle cinch cords for stacked sneaker drapes."
+      },
+      {
+        id: "VO-005",
+        title: "VOID-RUNNER BALLISTIC CROSSBODY",
+        category: "accessories",
+        priceINR: 1899,
+        priceUSD: 24,
+        gsm: 400,
+        limitedQty: 30,
+        fabric: "1000D Cordura Waterproof Fiber",
+        fit: "Adjustable Quick-Release Cobra Buckle",
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+        description: "Compact tactical vessel designed for encrypted essentials. Features laser-cut loop field, waterproof taped seams, and magnetic key retention."
+      },
+      {
+        id: "VO-006",
+        title: "CYBERNETIC MONOCHROME GRAPHIC TEE",
+        category: "tees",
+        priceINR: 2299,
+        priceUSD: 28,
+        gsm: 260,
+        limitedQty: 45,
+        fabric: "Pre-Shrunk Bio-Washed Cotton",
+        fit: "Relaxed Clan Fit",
+        image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=800&q=80",
+        description: "Dark anime cyberpunk typography spanning the dorsal vertebrae with distressed high-contrast front iconography and raw edge seams."
+      }
+    ];
+
+    /* =========================================================================
+       GLOBAL APP STATE
+       ========================================================================= */
+    let currentCurrency = 'INR'; // 'INR' or 'USD'
+    let cart = [];
+    let appliedPromo = null; // null or { code: 'ORBIT10', discountPercent: 10 }
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    // Fit builder selected states
+    let builderSelection = {
+      top: PRODUCTS[2],      // Heavy hoodie
+      bottom: PRODUCTS[3],   // Cargo pants
+      acc: PRODUCTS[4]       // Crossbody bag
+    };
+
+    /* =========================================================================
+       WEB AUDIO SYNTH ENGINE (Ambient Drone & Click Effects)
+       ========================================================================= */
+    let audioCtx = null;
+    let droneOsc1 = null;
+    let droneOsc2 = null;
+    let droneGain = null;
+    let isDronePlaying = false;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playBunkerOpenSoundEffects() {
+      try {
+        initAudioContext();
+        const now = audioCtx.currentTime;
+
+        // 1. White Noise Generator for High-Pressure Hydraulic Steam Hiss
+        const bufferSize = audioCtx.sampleRate * 1.8;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+
+        const noiseFilter = audioCtx.createBiquadFilter();
+        noiseFilter.type = 'bandpass';
+        noiseFilter.frequency.setValueAtTime(1400, now);
+        noiseFilter.frequency.exponentialRampToValueAtTime(400, now + 1.6);
+        noiseFilter.Q.setValueAtTime(2.5, now);
+
+        const noiseGain = audioCtx.createGain();
+        noiseGain.gain.setValueAtTime(0.4, now);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 1.7);
+
+        noise.connect(noiseFilter);
+        noiseFilter.connect(noiseGain);
+        noiseGain.connect(audioCtx.destination);
+        noise.start(now);
+
+        // 2. Heavy Clank / Mechanical Thud
+        const thudOsc = audioCtx.createOscillator();
+        const thudGain = audioCtx.createGain();
+        thudOsc.type = 'triangle';
+        thudOsc.frequency.setValueAtTime(120, now);
+        thudOsc.frequency.exponentialRampToValueAtTime(32, now + 0.45);
+
+        thudGain.gain.setValueAtTime(0.7, now);
+        thudGain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+
+        thudOsc.connect(thudGain);
+        thudGain.connect(audioCtx.destination);
+        thudOsc.start(now);
+        thudOsc.stop(now + 0.5);
+
+        // 3. Deep Metallic Rumble
+        const metalOsc = audioCtx.createOscillator();
+        const metalGain = audioCtx.createGain();
+        metalOsc.type = 'sawtooth';
+        metalOsc.frequency.setValueAtTime(65, now + 0.2);
+        metalOsc.frequency.linearRampToValueAtTime(45, now + 1.5);
+
+        metalGain.gain.setValueAtTime(0.001, now);
+        metalGain.gain.linearRampToValueAtTime(0.25, now + 0.3);
+        metalGain.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
+
+        metalOsc.connect(metalGain);
+        metalGain.connect(audioCtx.destination);
+        metalOsc.start(now + 0.2);
+        metalOsc.stop(now + 1.7);
+
+      } catch (err) {
+        console.warn("Audio synthesis suspended until user interaction:", err);
+      }
+    }
+
+    function toggleAudioDrone() {
+      initAudioContext();
+      const statusLabel = document.getElementById('audio-status-label');
+      const indicator = document.getElementById('audio-indicator');
+
+      if (!isDronePlaying) {
+        droneOsc1 = audioCtx.createOscillator();
+        droneOsc2 = audioCtx.createOscillator();
+        droneGain = audioCtx.createGain();
+
+        droneOsc1.type = 'sawtooth';
+        droneOsc1.frequency.setValueAtTime(55, audioCtx.currentTime);
+        
+        droneOsc2.type = 'triangle';
+        droneOsc2.frequency.setValueAtTime(110.5, audioCtx.currentTime);
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(220, audioCtx.currentTime);
+
+        droneGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+
+        droneOsc1.connect(filter);
+        droneOsc2.connect(filter);
+        filter.connect(droneGain);
+        droneGain.connect(audioCtx.destination);
+
+        droneOsc1.start();
+        droneOsc2.start();
+
+        isDronePlaying = true;
+        statusLabel.innerText = "AUDIO // ON";
+        indicator.classList.remove('bg-crimson');
+        indicator.classList.add('bg-acid');
+        showToast("AMBIENT CYBER-DRONE ENGAGED [55Hz SUB]");
+      } else {
+        if (droneGain) {
+          droneGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+          setTimeout(() => {
+            if (droneOsc1) droneOsc1.stop();
+            if (droneOsc2) droneOsc2.stop();
+          }, 500);
+        }
+        isDronePlaying = false;
+        statusLabel.innerText = "AUDIO // OFF";
+        indicator.classList.remove('bg-acid');
+        indicator.classList.add('bg-crimson');
+        showToast("AUDIO SILENCED");
+      }
+    }
+
+    function playBeepSound() {
+      try {
+        initAudioContext();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.09);
+      } catch (e) {
+        // Fallback
+      }
+    }
+
+    /* =========================================================================
+       INITIALIZATION & DOM RENDERING
+       ========================================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderProductCards();
+      renderFitBuilderControls();
+      updateFitBuilderDisplay();
+      startCountdownTimer();
+    });
+
+    /* =========================================================================
+       BUNKER BLAST DOOR CONTROLLER
+       ========================================================================= */
+    let isBunkerOpening = false;
+
+    function triggerOpenBunker() {
+      if (isBunkerOpening) return;
+      isBunkerOpening = true;
+
+      playBunkerOpenSoundEffects();
+
+      const enterBtn = document.getElementById('bunker-enter-btn');
+      const wheel = document.getElementById('bunker-locking-wheel');
+      const statusHud = document.getElementById('bunker-status-hud');
+      const statusLed = document.getElementById('hud-status-led');
+      const statusText = document.getElementById('hud-status-text');
+      const strobe = document.getElementById('bunker-strobe');
+      const leftDoor = document.getElementById('bunker-left-door');
+      const rightDoor = document.getElementById('bunker-right-door');
+      const overlay = document.getElementById('bunker-vault-overlay');
+
+      enterBtn.disabled = true;
+      statusLed.className = 'w-2 h-2 rounded-full bg-acid animate-ping';
+      statusText.innerText = 'ACCESS GRANTED // RELEASING HYDRAULICS';
+      statusText.className = 'text-xs font-bold text-acid tracking-widest uppercase font-mono';
+
+      wheel.classList.add('unlocking-spin');
+      statusHud.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+
+      strobe.classList.remove('opacity-0');
+      strobe.classList.add('opacity-100');
+      setTimeout(() => {
+        strobe.classList.remove('opacity-100');
+        strobe.classList.add('opacity-0');
+      }, 550);
+
+      spawnHydraulicSteam();
+
+      document.body.classList.add('rumble-active');
+      setTimeout(() => {
+        document.body.classList.remove('rumble-active');
+      }, 1000);
+
+      setTimeout(() => {
+        leftDoor.style.transform = 'translateX(-102%)';
+        rightDoor.style.transform = 'translateX(102%)';
+      }, 350);
+
+      setTimeout(() => {
+        overlay.classList.add('opacity-0', 'pointer-events-none', 'transition-opacity', 'duration-700');
+        showToast("BUNKER UNSEALED // WELCOME TO VANS-ORBIT ARCHIVE");
+      }, 1300);
+
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        isBunkerOpening = false;
+      }, 2100);
+    }
+
+    function spawnHydraulicSteam() {
+      const container = document.getElementById('bunker-steam-container');
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      for (let i = 0; i < 16; i++) {
+        const steam = document.createElement('div');
+        steam.className = 'steam-particle';
+        const size = Math.random() * 80 + 50;
+        steam.style.width = `${size}px`;
+        steam.style.height = `${size}px`;
+        steam.style.left = `${(windowWidth / 2) + (Math.random() * 80 - 40)}px`;
+        steam.style.top = `${(windowHeight * (i / 16)) + (Math.random() * 40 - 20)}px`;
+        steam.style.animationDelay = `${Math.random() * 0.3}s`;
+        container.appendChild(steam);
+
+        setTimeout(() => {
+          steam.remove();
+        }, 1800);
+      }
+    }
+
+    function resealBunker() {
+      playBeepSound();
+      const overlay = document.getElementById('bunker-vault-overlay');
+      const leftDoor = document.getElementById('bunker-left-door');
+      const rightDoor = document.getElementById('bunker-right-door');
+      const wheel = document.getElementById('bunker-locking-wheel');
+      const enterBtn = document.getElementById('bunker-enter-btn');
+      const statusHud = document.getElementById('bunker-status-hud');
+      const statusLed = document.getElementById('hud-status-led');
+      const statusText = document.getElementById('hud-status-text');
+
+      overlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+      leftDoor.style.transform = 'translateX(0%)';
+      rightDoor.style.transform = 'translateX(0%)';
+      wheel.classList.remove('unlocking-spin');
+      enterBtn.disabled = false;
+
+      statusHud.classList.remove('opacity-0');
+      statusLed.className = 'w-2 h-2 rounded-full bg-crimson animate-ping';
+      statusText.innerText = 'STATUS: HEAVY VAULT SEALED';
+      statusText.className = 'text-xs font-bold text-white tracking-widest uppercase font-mono';
+
+      showToast("BUNKER BLAST DOORS RESEALED");
+    }
+
+    function formatPrice(inr, usd) {
+      if (currentCurrency === 'INR') {
+        return `₹${inr.toLocaleString('en-IN')}`;
+      }
+      return `$${usd}`;
+    }
+
+    function toggleCurrency() {
+      playBeepSound();
+      currentCurrency = currentCurrency === 'INR' ? 'USD' : 'INR';
+      document.getElementById('currency-toggle-btn').innerText = currentCurrency === 'INR' ? 'INR [₹]' : 'USD [$]';
+      renderProductCards();
+      updateCartUI();
+      updateFitBuilderDisplay();
+      showToast(`CURRENCY SWITCHED TO ${currentCurrency}`);
+    }
+
+    function toggleCRT() {
+      const crtLayer = document.getElementById('crt-layer');
+      const label = document.getElementById('crt-status-label');
+      if (crtLayer.classList.contains('opacity-0')) {
+        crtLayer.classList.remove('opacity-0');
+        label.innerText = 'CRT: ON';
+        showToast("CRT SCANLINES: ACTIVATED");
+      } else {
+        crtLayer.classList.add('opacity-0');
+        label.innerText = 'CRT: OFF';
+        showToast("CRT SCANLINES: DEACTIVATED");
+      }
+    }
+
+    function renderProductCards() {
+      const grid = document.getElementById('products-grid');
+      
+      const filtered = PRODUCTS.filter(p => {
+        const matchesCategory = activeFilter === 'all' || p.category === activeFilter;
+        const matchesSearch = searchQuery === '' || 
+          p.title.toLowerCase().includes(searchQuery) || 
+          p.id.toLowerCase().includes(searchQuery) ||
+          p.fabric.toLowerCase().includes(searchQuery);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center border border-dashed border-cyberborder text-chalk-gray font-mono">
+            <i data-lucide="slash" class="w-8 h-8 mx-auto mb-2 text-crimson"></i>
+            <p>NO ARCHIVAL PIECES MATCH SEARCH CIPHER.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = filtered.map(product => `
+        <div class="border border-cyberborder bg-surface hover:border-white transition-all duration-300 group flex flex-col justify-between">
+          
+          <!-- Image Container -->
+          <div class="relative aspect-square overflow-hidden bg-black cursor-pointer" onclick="openQuickViewModal('${product.id}')">
+            <img 
+              src="${product.image}" 
+              alt="${product.title}" 
+              class="w-full h-full object-cover filter contrast-110 group-hover:scale-105 transition-transform duration-500"
+            />
+            
+            <!-- GSM Badge -->
+            <div class="absolute top-3 left-3 bg-black/90 border border-cyberborder px-2 py-0.5 text-[9px] text-gray-300 font-mono">
+              ${product.gsm} GSM // HEAVYWEIGHT
+            </div>
+
+            <!-- Limited Stock Tag -->
+            <div class="absolute top-3 right-3 bg-white text-black font-black text-[9px] px-2 py-0.5 tracking-widest font-mono">
+              ONLY ${product.limitedQty} LEFT
+            </div>
+
+            <!-- Overlay Quick View Trigger -->
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span class="px-4 py-2 border border-white bg-black/90 text-white text-xs font-mono font-bold tracking-widest uppercase hover:bg-white hover:text-black transition">
+                INSPECT DETAILS
+              </span>
+            </div>
+          </div>
+
+          <!-- Card Content Body -->
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-[10px] text-chalk-gray font-mono mb-1">
+                <span>${product.id}</span>
+                <span class="text-acid">IN STOCK</span>
+              </div>
+              <h3 class="font-syne font-black text-sm sm:text-base text-white group-hover:text-crimson transition leading-tight uppercase">
+                ${product.title}
+              </h3>
+              <p class="text-[11px] text-gray-400 font-mono mt-1.5 line-clamp-2">
+                ${product.description}
+              </p>
+            </div>
+
+            <!-- Price & Size Trigger Row -->
+            <div class="pt-2 border-t border-cyberborder/60">
+              <div class="flex items-baseline justify-between mb-3">
+                <span class="font-syne font-black text-lg text-white">
+                  ${formatPrice(product.priceINR, product.priceUSD)}
+                </span>
+                <span class="text-[10px] text-chalk-gray font-mono">${product.fit}</span>
+              </div>
+
+              <!-- Quick Add Buttons -->
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="openQuickViewModal('${product.id}')" class="py-2.5 border border-border-stark hover:border-white text-white text-xs font-mono uppercase tracking-widest transition text-center">
+                  VIEW SPECS
+                </button>
+                <button onclick="quickAddToCart('${product.id}')" class="py-2.5 bg-white hover:bg-crimson text-black hover:text-white font-syne font-black text-xs uppercase tracking-widest transition text-center">
+                  + DROP CART
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function setFilterCategory(category) {
+      playBeepSound();
+      activeFilter = category;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.dataset.category === category) {
+          btn.classList.add('bg-white', 'text-black', 'font-bold');
+          btn.classList.remove('bg-surface', 'text-gray-300', 'border');
+        } else {
+          btn.classList.remove('bg-white', 'text-black', 'font-bold');
+          btn.classList.add('bg-surface', 'text-gray-300', 'border');
+        }
+      });
+      renderProductCards();
+    }
+
+    function handleSearchFilter(e) {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderProductCards();
+    }
+
+    function triggerSearchFocus() {
+      const input = document.getElementById('product-search-input');
+      input.focus();
+      input.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* =========================================================================
+       FIT BUILDER SYSTEM
+       ========================================================================= */
+    function renderFitBuilderControls() {
+      const tops = PRODUCTS.filter(p => p.category === 'hoodies' || p.category === 'tees');
+      const bottoms = PRODUCTS.filter(p => p.category === 'bottoms');
+      const accessories = PRODUCTS.filter(p => p.category === 'accessories');
+
+      document.getElementById('builder-tops-selector').innerHTML = tops.map(t => `
+        <button onclick="selectBuilderPart('top', '${t.id}')" class="p-2 border text-left text-[10px] font-mono transition ${builderSelection.top.id === t.id ? 'border-white bg-white/10 text-white font-bold' : 'border-cyberborder text-chalk-gray hover:text-white'}">
+          <div class="truncate">${t.title.split(' ')[0]} ${t.title.split(' ')[1] || ''}</div>
+          <div class="text-[9px] text-crimson">${t.gsm} GSM</div>
+        </button>
+      `).join('');
+
+      document.getElementById('builder-bottoms-selector').innerHTML = bottoms.map(b => `
+        <button onclick="selectBuilderPart('bottom', '${b.id}')" class="p-2 border text-left text-[10px] font-mono transition ${builderSelection.bottom.id === b.id ? 'border-white bg-white/10 text-white font-bold' : 'border-cyberborder text-chalk-gray hover:text-white'}">
+          <div class="truncate">${b.title.split(' ')[0]} ${b.title.split(' ')[1] || ''}</div>
+          <div class="text-[9px] text-crimson">${b.gsm} GSM</div>
+        </button>
+      `).join('');
+
+      document.getElementById('builder-acc-selector').innerHTML = accessories.map(a => `
+        <button onclick="selectBuilderPart('acc', '${a.id}')" class="p-2 border text-left text-[10px] font-mono transition ${builderSelection.acc.id === a.id ? 'border-white bg-white/10 text-white font-bold' : 'border-cyberborder text-chalk-gray hover:text-white'}">
+          <div class="truncate">${a.title.split(' ')[0]} ${a.title.split(' ')[1] || ''}</div>
+          <div class="text-[9px] text-crimson">${formatPrice(a.priceINR, a.priceUSD)}</div>
+        </button>
+      `).join('');
+    }
+
+    function selectBuilderPart(slot, productId) {
+      playBeepSound();
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (product) {
+        builderSelection[slot] = product;
+        renderFitBuilderControls();
+        updateFitBuilderDisplay();
+      }
+    }
+
+    function updateFitBuilderDisplay() {
+      document.getElementById('fit-top-img').src = builderSelection.top.image;
+      document.getElementById('fit-bottom-img').src = builderSelection.bottom.image;
+
+      const totalGsm = builderSelection.top.gsm + builderSelection.bottom.gsm;
+      document.getElementById('fit-builder-mass').innerText = `${totalGsm} GSM TOTAL ARMORED COMBAT SPEC`;
+      document.getElementById('fit-acc-badge').innerText = `+ ${builderSelection.acc.title.substring(0, 16)}...`;
+
+      const itemsList = document.getElementById('fit-bundle-items');
+      itemsList.innerHTML = `
+        <div class="flex justify-between">
+          <span class="text-white truncate max-w-[200px]">• ${builderSelection.top.title}</span>
+          <span>${formatPrice(builderSelection.top.priceINR, builderSelection.top.priceUSD)}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-white truncate max-w-[200px]">• ${builderSelection.bottom.title}</span>
+          <span>${formatPrice(builderSelection.bottom.priceINR, builderSelection.bottom.priceUSD)}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-white truncate max-w-[200px]">• ${builderSelection.acc.title}</span>
+          <span>${formatPrice(builderSelection.acc.priceINR, builderSelection.acc.priceUSD)}</span>
+        </div>
+      `;
+
+      const rawInr = builderSelection.top.priceINR + builderSelection.bottom.priceINR + builderSelection.acc.priceINR;
+      const rawUsd = builderSelection.top.priceUSD + builderSelection.bottom.priceUSD + builderSelection.acc.priceUSD;
+
+      const discountedInr = Math.round(rawInr * 0.9);
+      const discountedUsd = Math.round(rawUsd * 0.9);
+
+      document.getElementById('fit-bundle-price').innerText = formatPrice(discountedInr, discountedUsd);
+    }
+
+    function addBundleToCart() {
+      playBeepSound();
+      addToCart(builderSelection.top.id, 'L');
+      addToCart(builderSelection.bottom.id, 'L');
+      addToCart(builderSelection.acc.id, 'ONE-SIZE');
+      toggleCartDrawer(true);
+      showToast("ORBIT BUNDLE ADDED TO DROP CART");
+    }
+
+    /* =========================================================================
+       CART MANAGEMENT ENGINE
+       ========================================================================= */
+    function quickAddToCart(productId) {
+      playBeepSound();
+      addToCart(productId, 'L');
+      toggleCartDrawer(true);
+    }
+
+    function addToCart(productId, size = 'L') {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      const existingIndex = cart.findIndex(item => item.id === productId && item.size === size);
+      if (existingIndex > -1) {
+        cart[existingIndex].quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          title: product.title,
+          priceINR: product.priceINR,
+          priceUSD: product.priceUSD,
+          image: product.image,
+          size: size,
+          quantity: 1
+        });
+      }
+
+      updateCartUI();
+      showToast(`ADDED: ${product.title} [${size}]`);
+    }
+
+    function updateCartUI() {
+      const counterBadge = document.getElementById('cart-counter-badge');
+      const drawerCount = document.getElementById('cart-drawer-count');
+      const container = document.getElementById('cart-items-container');
+
+      const totalItems = cart.reduce((acc, curr) => acc + curr.quantity, 0);
+      counterBadge.innerText = totalItems;
+      drawerCount.innerText = `(${totalItems})`;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="h-64 flex flex-col items-center justify-center text-center text-chalk-gray space-y-3">
+            <i data-lucide="package-open" class="w-10 h-10 text-steel-light"></i>
+            <p class="text-xs">YOUR DROP CART IS CURRENTLY EMPTY.</p>
+            <button onclick="toggleCartDrawer(false)" class="text-white underline text-xs">EXPLORE THE ARCHIVE</button>
+          </div>
+        `;
+        document.getElementById('cart-subtotal-val').innerText = formatPrice(0, 0);
+        document.getElementById('cart-grandtotal-val').innerText = formatPrice(0, 0);
+        document.getElementById('cart-discount-val').innerText = formatPrice(0, 0);
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = cart.map((item, index) => `
+        <div class="flex items-center space-x-3 bg-surface border border-cyberborder p-3 group">
+          <div class="w-16 h-16 bg-black flex-none border border-cyberborder overflow-hidden">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-bold text-xs text-white truncate">${item.title}</h4>
+            <div class="flex items-center space-x-2 text-[10px] text-chalk-gray mt-0.5">
+              <span>SIZE: <strong class="text-white">${item.size}</strong></span>
+              <span>•</span>
+              <span>${formatPrice(item.priceINR, item.priceUSD)}</span>
+            </div>
+            
+            <div class="flex items-center space-x-2 mt-2">
+              <button onclick="modifyQuantity(${index}, -1)" class="w-5 h-5 bg-surface2 border border-cyberborder text-white flex items-center justify-center hover:border-white text-xs">-</button>
+              <span class="text-xs text-white font-bold">${item.quantity}</span>
+              <button onclick="modifyQuantity(${index}, 1)" class="w-5 h-5 bg-surface2 border border-cyberborder text-white flex items-center justify-center hover:border-white text-xs">+</button>
+            </div>
+          </div>
+          <button onclick="removeCartItem(${index})" class="text-chalk-gray hover:text-crimson p-1">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        </div>
+      `).join('');
+
+      const subtotalINR = cart.reduce((acc, curr) => acc + (curr.priceINR * curr.quantity), 0);
+      const subtotalUSD = cart.reduce((acc, curr) => acc + (curr.priceUSD * curr.quantity), 0);
+
+      let discountINR = 0;
+      let discountUSD = 0;
+
+      if (appliedPromo) {
+        discountINR = Math.round(subtotalINR * (appliedPromo.discountPercent / 100));
+        discountUSD = Math.round(subtotalUSD * (appliedPromo.discountPercent / 100));
+      }
+
+      const grandTotalINR = subtotalINR - discountINR;
+      const grandTotalUSD = subtotalUSD - discountUSD;
+
+      document.getElementById('cart-subtotal-val').innerText = formatPrice(subtotalINR, subtotalUSD);
+      document.getElementById('cart-discount-val').innerText = `-${formatPrice(discountINR, discountUSD)}`;
+      document.getElementById('cart-grandtotal-val').innerText = formatPrice(grandTotalINR, grandTotalUSD);
+
+      const thresholdINR = 4000;
+      const progressPercent = Math.min(100, Math.round((subtotalINR / thresholdINR) * 100));
+      document.getElementById('shipping-progress-bar').style.width = `${progressPercent}%`;
+      if (subtotalINR >= thresholdINR) {
+        document.getElementById('shipping-threshold-text').innerText = 'FREE AIR CARGO UNLOCKED';
+      } else {
+        const remaining = thresholdINR - subtotalINR;
+        document.getElementById('shipping-threshold-text').innerText = `₹${remaining.toLocaleString('en-IN')} AWAY`;
+      }
+
+      lucide.createIcons();
+    }
+
+    function modifyQuantity(index, delta) {
+      playBeepSound();
+      if (!cart[index]) return;
+      cart[index].quantity += delta;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function removeCartItem(index) {
+      playBeepSound();
+      cart.splice(index, 1);
+      updateCartUI();
+      showToast("ITEM REMOVED FROM DROP CART");
+    }
+
+    function toggleCartDrawer(open) {
+      playBeepSound();
+      const drawer = document.getElementById('cart-drawer');
+      const overlay = document.getElementById('cart-drawer-overlay');
+
+      if (open) {
+        overlay.classList.remove('hidden');
+        setTimeout(() => {
+          overlay.classList.remove('opacity-0');
+          drawer.classList.remove('translate-x-full');
+        }, 10);
+      } else {
+        overlay.classList.add('opacity-0');
+        drawer.classList.add('translate-x-full');
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+        }, 300);
+      }
+    }
+
+    function applyPromoCode() {
+      playBeepSound();
+      const input = document.getElementById('promo-input');
+      const status = document.getElementById('promo-status-msg');
+      const code = input.value.trim().toUpperCase();
+
+      if (code === 'ORBIT10') {
+        appliedPromo = { code: 'ORBIT10', discountPercent: 10 };
+        status.innerText = "✓ CODE 'ORBIT10' ACTIVATED // 10% REDUCTION GRANTED";
+        status.className = "text-[10px] text-acid font-mono block";
+        showToast("PROMO GRANTED: 10% OFF ENTIRE DROP");
+      } else {
+        status.innerText = "✕ CIPHER CODE INVALID OR EXPIRED";
+        status.className = "text-[10px] text-crimson font-mono block";
+      }
+      updateCartUI();
+    }
+
+    function proceedToCheckout() {
+      if (cart.length === 0) {
+        showToast("PLEASE SELECT AT LEAST ONE ARCHIVAL PIECE");
+        return;
+      }
+      playBeepSound();
+      toggleCartDrawer(false);
+      const randomCipher = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('checkout-cipher-id').innerText = `#VO-${randomCipher}-CLAN`;
+      document.getElementById('checkout-modal').classList.remove('hidden');
+      document.getElementById('checkout-modal').classList.add('flex');
+    }
+
+    function closeCheckoutModal() {
+      playBeepSound();
+      document.getElementById('checkout-modal').classList.add('hidden');
+      document.getElementById('checkout-modal').classList.remove('flex');
+      cart = [];
+      updateCartUI();
+    }
+
+    /* =========================================================================
+       QUICK VIEW MODAL & SIZING
+       ========================================================================= */
+    let selectedModalSize = 'L';
+    let currentModalProductId = null;
+
+    function openQuickViewModal(productId) {
+      playBeepSound();
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      currentModalProductId = productId;
+      selectedModalSize = 'L';
+
+      document.getElementById('modal-product-img').src = product.image;
+      document.getElementById('modal-product-gsm').innerText = `${product.gsm} GSM // HEAVYWEIGHT SPEC`;
+      document.getElementById('modal-product-code').innerText = `ARCHIVE SPEC // ${product.id}`;
+      document.getElementById('modal-product-title').innerText = product.title;
+      document.getElementById('modal-product-price').innerText = formatPrice(product.priceINR, product.priceUSD);
+      document.getElementById('modal-product-desc').innerText = product.description;
+      document.getElementById('modal-spec-fabric').innerText = product.fabric;
+      document.getElementById('modal-spec-fit').innerText = product.fit;
+
+      const sizeContainer = document.getElementById('modal-size-container');
+      const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+      sizeContainer.innerHTML = sizes.map(sz => `
+        <button onclick="setModalSize('${sz}')" class="modal-sz-btn py-2 border font-mono text-xs transition ${sz === selectedModalSize ? 'border-white bg-white text-black font-bold' : 'border-cyberborder text-chalk-gray hover:text-white'}">
+          ${sz}
+        </button>
+      `).join('');
+
+      document.getElementById('modal-add-btn').onclick = () => {
+        addToCart(product.id, selectedModalSize);
+        closeQuickViewModal();
+        toggleCartDrawer(true);
+      };
+
+      const modal = document.getElementById('quick-view-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function setModalSize(sz) {
+      playBeepSound();
+      selectedModalSize = sz;
+      document.querySelectorAll('.modal-sz-btn').forEach(btn => {
+        if (btn.innerText.trim() === sz) {
+          btn.className = 'modal-sz-btn py-2 border font-mono text-xs transition border-white bg-white text-black font-bold';
+        } else {
+          btn.className = 'modal-sz-btn py-2 border font-mono text-xs transition border-cyberborder text-chalk-gray hover:text-white';
+        }
+      });
+    }
+
+    function closeQuickViewModal() {
+      playBeepSound();
+      const modal = document.getElementById('quick-view-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function openSizeGuideModal() {
+      playBeepSound();
+      const modal = document.getElementById('size-guide-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSizeGuideModal() {
+      playBeepSound();
+      const modal = document.getElementById('size-guide-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    function startCountdownTimer() {
+      let seconds = 3600 * 4 + 18 * 60 + 22;
+      setInterval(() => {
+        if (seconds > 0) {
+          seconds--;
+          const hrs = Math.floor(seconds / 3600);
+          const mins = Math.floor((seconds % 3600) / 60);
+          const secs = seconds % 60;
+          document.getElementById('drop-countdown').innerText = 
+            `04:${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+      }, 1000);
+    }
+
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      playBeepSound();
+      showToast("ENCRYPTED CIPHER RECORDED // ACCESS GRANTED");
+      e.target.reset();
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-message');
+      text.innerText = message;
+      clearTimeout(toastTimer);
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2600);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeQuickViewModal();
+        closeSizeGuideModal();
+        closeCheckoutModal();
+        toggleCartDrawer(false);
+      }
+    });
+  </script>
+</body>
+</html>
