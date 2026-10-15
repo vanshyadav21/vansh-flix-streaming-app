@@ -1,0 +1,45 @@
+version: "3.8" 
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "devops"
+    ports:
+      - "3306:3306"
+    networks:
+      - app
+    volumes:
+      - ./app-vol:/var/lib/mysql
+    healthcheck:
+      test: ["CMD","nysqladmin","ping","-h","localhost","-uroot","-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+    restart: always
+
+  stream-app:
+    build:
+      context: .
+    container_name: app-cont
+    ports:
+      - "80:80"
+    networks:
+      - app
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: "mysql"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "devops"
+
+    restart: always
+
+volumes:
+  app-vol:
+networks:
+  app:
