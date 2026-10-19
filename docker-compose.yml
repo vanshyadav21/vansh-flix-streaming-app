@@ -23,8 +23,7 @@ services:
     restart: always
 
   stream-app:
-    build:
-      context: .
+    image: vanshyadavdevops/netflix
     container_name: app-cont
     ports:
       - "80:80"
