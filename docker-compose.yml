@@ -24,7 +24,7 @@ services:
 
   stream-app:
     image: vanshyadavdevops/netflix
-    container_name: app-cont
+    container_name: netflix-app
     ports:
       - "80:80"
     networks:
